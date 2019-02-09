@@ -4,7 +4,7 @@ import java.util.List;
 public class IpToC {
     public static void main(String[]args) {
         IpToC sol = new IpToC();
-        List<String> res = sol.ipRange2Cidr("0.0.0.0", 256);
+        List<String> res = sol.ipRange2Cidr("0.0.0.0", 2147483647);
         printResult(res);
     }
 
@@ -19,7 +19,7 @@ public class IpToC {
             if (startIpLong == 0) {
                 //special case, 0 means we could cover any range in
                 //32 bit
-                maxRange = 1l << 31;
+                maxRange = 1l << 32;
             }
             //adjust to represent many ips as possible
             while (maxRange > range) {

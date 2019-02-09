@@ -49,7 +49,7 @@ public class PourWater {
         int currIdx = pos;
         int leftPosIdx = pos;
         while (currIdx >= 0 && heights[currIdx] + waters[currIdx] <= heights[leftPosIdx] + waters[leftPosIdx]) {
-            if (heights[currIdx] + waters[currIdx] <= heights[leftPosIdx] + waters[leftPosIdx]) {
+            if (heights[currIdx] + waters[currIdx] < heights[leftPosIdx] + waters[leftPosIdx]) {
                 leftPosIdx = currIdx;
             }
             currIdx--;
