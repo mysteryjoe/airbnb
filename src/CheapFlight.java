@@ -224,7 +224,7 @@ class Dijkstra {
                     nextState.prev = curr;
 
                     pq.offer(nextState);
-                    if (newCost < minState.cost || newStop < minState.stop) {
+                    if (newCost < minState.cost && newStop < minState.stop) {
                         minState.cost = newCost;
                         minState.stop = newStop;
                     }
