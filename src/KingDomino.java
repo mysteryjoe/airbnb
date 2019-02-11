@@ -6,8 +6,8 @@
  *    find total score
  */
 class KingDomino {
-    private int[] dirX = {0, 0, -1, 1};
-    private int[] dirY = {1, -1, 0, 0};
+    private int[] dx = {0, 0, -1, 1};
+    private int[] dy = {1, -1, 0, 0};
 
     public static void main(String[] args) {
         String[] input = {"S0 W1 W1 W0 L2",
@@ -39,10 +39,9 @@ class KingDomino {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (!visited[i][j]) {
-                    int[] point = new int[]{0};
-                    int[] area = new int[]{0};
-                    dfs(grid, visited, i, j, grid[i][j].charAt(0), area, point);
-                    totalScore += point[0] * area[0];
+                    int[] info = new int[2];
+                    dfs(grid, visited, i, j, grid[i][j].charAt(0), info);
+                    totalScore += info[0] * info[1];
                 }
             }
         }
@@ -53,15 +52,15 @@ class KingDomino {
         return i >= 0 && i < row && j >= 0 && j < col;
     }
 
-    private void dfs(String[][] grid, boolean[][] visited, int i, int j, char type, int[] area, int[] point) {
+    private void dfs(String[][] grid, boolean[][] visited, int i, int j, char type, int[] info) {
         if (!inBound(i, j, grid.length, grid[0].length) || visited[i][j] || grid[i][j].charAt(0) != type) {
             return;
         }
         visited[i][j] = true;
-        point[0] += grid[i][j].charAt(1) - '0';
-        area[0]++;
+        info[0] += Integer.parseInt(grid[i][j].substring(1));
+        info[1]++;
         for (int k = 0; k < 4; k++) {
-            dfs(grid, visited, i + dirX[k], j + dirY[k], type, area, point);
+            dfs(grid, visited, i + dx[k], j + dy[k], type, info);
         }
     }
 }

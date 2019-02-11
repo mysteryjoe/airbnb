@@ -2,7 +2,7 @@ import java.util.*;
 
 public class NestedList {
     Iterator<NestedInteger> currIter;
-    Integer curr = null;
+    Integer currInteger = null;
     Stack<Iterator<NestedInteger>> stack;
     public NestedList(List<NestedInteger> nestedList) {
         stack = new Stack<>();
@@ -11,18 +11,18 @@ public class NestedList {
 
     public Integer next() {
         if (hasNext()) {
-            int res = curr;
-            curr = null;
+            int res = currInteger;
+            currInteger = null;
             return res;
         }
         return null;
     }
 
     public boolean hasNext() {
-        if (curr != null) {
+        if (currInteger != null) {
             return true;
         }
-        while (curr == null) {
+        while (currInteger == null) {
             while (!stack.isEmpty() && !currIter.hasNext()) {
                 currIter = stack.pop();
             }
@@ -31,7 +31,7 @@ public class NestedList {
             }
             NestedInteger next = currIter.next();
             if (next.isInteger()) {
-                curr = next.getInteger();
+                currInteger = next.getInteger();
             } else {
                 stack.push(currIter);
                 currIter = next.getList().iterator();
