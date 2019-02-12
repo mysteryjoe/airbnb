@@ -4,7 +4,7 @@ import java.util.List;
 public class IpToC {
     public static void main(String[]args) {
         IpToC sol = new IpToC();
-        List<String> res = sol.ipRange2Cidr("0.0.0.0", 2147483647);
+        List<String> res = sol.ipRange2Cidr("0.0.0.0", 256);
         printResult(res);
     }
 
@@ -56,19 +56,12 @@ public class IpToC {
     }
 
     private String longToIp(long ipLong) {
-        long[] nums = new long[4];
+        String[] nums = new String[4];
         for (int i = 3; i >= 0; i--) {
-            nums[i] = ipLong & 255;
+            nums[i] = "" + (ipLong & 255);
             ipLong = ipLong >> 8;
         }
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            res.append(nums[i]);
-            if (i == 3) {
-                break;
-            }
-            res.append('.');
-        }
-        return res.toString();
+
+        return String.join(".", nums);
     }
 }

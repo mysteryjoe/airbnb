@@ -103,50 +103,6 @@ public class PourWater {
         System.out.println();
     }
 
-    //follow up:
-    //
-    // 假设两边两个墙有个高度 分别为leftH 和rightH,
-    // 则只需要在水流最后pos的地方判断是否是0 or n，然后判断当前高度是否超过
-    public void pourWater(int[] heights, int water, int pos, int leftH, int rightH) {
-        int[] waters = new int[heights.length];
-        for (int i = 0; i < water; i++) {
-            pour(heights, pos, waters, leftH, rightH);
-        }
-        print(heights, waters);
-    }
-
-    private void pour(int[] heights, int pos, int[] waters, int leftH, int rightH) {
-        boolean leftOut = false;
-        int currIdx = pos;
-        while (currIdx > 0 && heights[currIdx] + waters[currIdx] >= heights[currIdx - 1] + waters[currIdx - 1]) {
-            currIdx--;
-        }
-        //check if it leaves out
-        if (currIdx == 0 && heights[0] + waters[0] + 1 > leftH) {
-            leftOut = true;
-        } else if (currIdx != pos) {
-            //else check if it finds a position to fall
-            waters[currIdx]++;
-            return;
-        }
-        //else move right
-        currIdx = pos;
-        while (currIdx < heights.length - 1 && heights[currIdx] + waters[currIdx] >= heights[currIdx + 1] + waters[currIdx + 1]) {
-            currIdx++;
-        }
-        //check if it leaves out
-        if (currIdx == heights.length - 1 && heights[currIdx] + waters[currIdx] + 1 > rightH) {
-            return;
-        }
-
-        //if leaves left and not drop right
-        if (currIdx == pos && leftOut) {
-            return;
-        }
-        //drop right if it eventually fall and don't leaves out left
-        waters[currIdx]++;
-    }
-
     public static void main(String[] args) {
         PourWater sol = new PourWater();
         int[] land = new int[] {5, 4, 2, 1, 3, 2, 1, 0, 1, 4};
